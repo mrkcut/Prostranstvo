@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пропозиція для «Пространства» · ArtProstir</title>
+
+<!-- Fonts: Unbounded (заголовки, цифри, акценти) + Manrope (основний текст) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================
+   CSS CUSTOM PROPERTIES (THEME: Bold Signal)
+   Change these to change the whole look
+   =========================================== */
+:root {
+    /* Colors */
+    --bg-primary: #141414;
+    --bg-gradient: linear-gradient(135deg, #141414 0%, #2a2a2a 50%, #141414 100%);
+    --card-bg: #FF5722;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.62);
+    --text-on-card: #141414;
+    --rule: rgba(255, 255, 255, 0.14);
+
+    /* Typography */
+    --font-display: 'Unbounded', sans-serif;
+    --font-body: 'Manrope', sans-serif;
+    --num-size: clamp(1.75rem, 5.5vw, 4.5rem);
+    --label-size: clamp(0.6rem, 0.95vw, 0.8rem);
+    --lead-size: clamp(0.8rem, 1.45vw, 1.1rem);
+
+    /* Layout */
+    --top-h: clamp(2.25rem, 7vw, 5rem);
+
+    /* Animation */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-normal: 0.7s;
+}
+
+/* ===========================================
+   BASE STYLES
+   =========================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===========================================
+   VIEWPORT FITTING: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   These styles ensure slides fit exactly in the viewport.
+   =========================================== */
+
+/* 1. Lock html/body to viewport */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+/* 2. Each slide = exact viewport height */
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    overflow: hidden; /* CRITICAL: Prevent ANY overflow */
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 3. Content container with flex for centering */
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    overflow: hidden; /* Double-protection against overflow */
+    padding: var(--slide-padding);
+}
+
+/* 4. ALL typography uses clamp() for responsive scaling */
+:root {
+    /* Titles scale from mobile to desktop */
+    --title-size: clamp(1.5rem, 5vw, 4rem);
+    --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+    --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+
+    /* Body text */
+    --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+    --small-size: clamp(0.65rem, 1vw, 0.875rem);
+
+    /* Spacing scales with viewport */
+    --slide-padding: clamp(1rem, 4vw, 4rem);
+    --content-gap: clamp(0.5rem, 2vw, 2rem);
+    --element-gap: clamp(0.25rem, 1vw, 1rem);
+}
+
+/* 5. Cards/containers use viewport-relative max sizes */
+.card, .container, .content-box {
+    max-width: min(90vw, 1000px);
+    max-height: min(80vh, 700px);
+}
+
+/* 6. Lists auto-scale with viewport */
+.feature-list, .bullet-list {
+    gap: clamp(0.4rem, 1vh, 1rem);
+}
+
+.feature-list li, .bullet-list li {
+    font-size: var(--body-size);
+    line-height: 1.4;
+}
+
+/* 7. Grids adapt to available space */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+/* 8. Images constrained to viewport */
+img, .image-container {
+    max-width: 100%;
+    max-height: min(50vh, 400px);
+    object-fit: contain;
+}
+
+/* ===========================================
+   RESPONSIVE BREAKPOINTS
+   Aggressive scaling for smaller viewports
+   =========================================== */
+
+/* Short viewports (< 700px height) */
+@media (max-height: 700px) {
+    :root {
+        --slide-padding: clamp(0.75rem, 3vw, 2rem);
+        --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+        --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+        --h2-size: clamp(1rem, 3vw, 1.75rem);
+    }
+}
+
+/* Very short viewports (< 600px height) */
+@media (max-height: 600px) {
+    :root {
+        --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+        --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+        --title-size: clamp(1.1rem, 4vw, 2rem);
+        --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+    }
+
+    /* Hide non-essential elements */
+    .nav-dots, .keyboard-hint, .decorative {
+        display: none;
+    }
+}
+
+/* Extremely short (landscape phones, < 500px height) */
+@media (max-height: 500px) {
+    :root {
+        --slide-padding: clamp(0.4rem, 2vw, 1rem);
+        --title-size: clamp(1rem, 3.5vw, 1.5rem);
+        --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+        --body-size: clamp(0.65rem, 1vw, 0.85rem);
+    }
+}
+
+/* Narrow viewports (< 600px width) */
+@media (max-width: 600px) {
+    :root {
+        --title-size: clamp(1.25rem, 7vw, 2.5rem);
+    }
+
+    /* Stack grids vertically */
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   Respect user preferences
+   =========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+/* --- end of viewport-base.css --- */
+
+/* ===========================================
+   DECK SURFACE
+   Dark gradient + faint structural grid
+   =========================================== */
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+    background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px) 0 0 / clamp(40px, 5vw, 72px) clamp(40px, 5vw, 72px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px) 0 0 / clamp(40px, 5vw, 72px) clamp(40px, 5vw, 72px),
+        var(--bg-gradient);
+}
+
+/* ===========================================
+   TOP BAR: slide number (left) + breadcrumbs (right)
+   =========================================== */
+.topbar {
+    position: absolute;
+    top: var(--slide-padding);
+    left: var(--slide-padding);
+    right: var(--slide-padding);
+    height: var(--top-h);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--num-size);
+    line-height: 0.9;
+    color: var(--card-bg);
+    letter-spacing: -0.03em;
+}
+.num small {
+    font-size: 0.28em;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    margin-left: 0.4em;
+    vertical-align: top;
+}
+
+.crumbs {
+    display: flex;
+    gap: clamp(0.6rem, 1.8vw, 1.75rem);
+    font-size: var(--label-size);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.crumbs span { opacity: 0.32; }
+.crumbs span.on { opacity: 1; }
+.crumbs span.on::before {
+    content: '';
+    display: inline-block;
+    width: 0.55em; height: 0.55em;
+    background: var(--card-bg);
+    margin-right: 0.5em;
+    vertical-align: 0.05em;
+}
+
+/* Brand mark (bottom-right) */
+.brand {
+    position: absolute;
+    right: var(--slide-padding);
+    bottom: var(--slide-padding);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--label-size);
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    z-index: 2;
+}
+
+/* Content area clears the top bar */
+.slide-content {
+    padding-top: calc(var(--slide-padding) + var(--top-h));
+    gap: var(--content-gap);
+}
+
+/* ===========================================
+   SHARED TYPOGRAPHY
+   =========================================== */
+.kicker {
+    font-size: var(--label-size);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--card-bg);
+}
+
+h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--title-size);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--h2-size);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+}
+
+.lead {
+    font-size: var(--lead-size);
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 42ch;
+}
+
+/* ===========================================
+   TITLE SLIDE: orange card bottom-left
+   =========================================== */
+.s-title .slide-content { justify-content: flex-end; }
+
+.hero-card {
+    width: min(80vw, 1000px);
+    background: var(--card-bg);
+    color: var(--text-on-card);
+    padding: clamp(1.1rem, 3.5vw, 3.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.4rem, 1.4vh, 1.1rem);
+}
+.hero-card .kicker { color: var(--text-on-card); }
+.hero-card .channels {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--h3-size);
+    line-height: 1.2;
+}
+.hero-card .tagline {
+    font-size: var(--lead-size);
+    font-weight: 500;
+    line-height: 1.45;
+    max-width: 48ch;
+}
+
+/* ===========================================
+   SPLIT LAYOUT: left column (heading or card) + right column (rows)
+   =========================================== */
+.split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(1rem, 4vw, 4rem);
+    align-items: center;
+}
+.split .left {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1.6vh, 1.25rem);
+}
+
+/* Channel card (left column on channel slides) */
+.channel-card {
+    background: var(--card-bg);
+    color: var(--text-on-card);
+    padding: clamp(1rem, 2.6vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1.6vh, 1.1rem);
+    max-height: min(70vh, 520px);
+}
+.channel-card .kicker { color: var(--text-on-card); opacity: 0.75; }
+.channel-card h2 { font-size: clamp(1.15rem, 2.9vw, 2.3rem); }
+.channel-card p {
+    font-size: var(--lead-size);
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+/* Labeled rows: label (Unbounded, orange) + text (Manrope) */
+.rows { list-style: none; display: flex; flex-direction: column; }
+.rows li {
+    display: grid;
+    grid-template-columns: clamp(6.5rem, 13vw, 11rem) 1fr;
+    gap: clamp(0.5rem, 1.5vw, 1.5rem);
+    padding: clamp(0.55rem, 2vh, 1.25rem) 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+}
+.rows li:last-child { border-bottom: 1px solid var(--rule); }
+.rows .label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--label-size);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--card-bg);
+    line-height: 1.4;
+}
+.rows .text {
+    font-size: var(--body-size);
+    line-height: 1.45;
+}
+.rows li.note .text { color: var(--text-secondary); }
+
+/* ===========================================
+   FINAL SLIDE: big CTA card
+   =========================================== */
+.s-final .slide-content { justify-content: center; }
+.cta-card {
+    width: min(84vw, 1060px);
+    background: var(--card-bg);
+    color: var(--text-on-card);
+    padding: clamp(1.25rem, 4.5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 2vh, 1.5rem);
+}
+.cta-card .kicker { color: var(--text-on-card); }
+.cta-card h2 { font-size: var(--title-size); line-height: 1.04; }
+.cta-card .steps {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(0.6rem, 2vw, 2rem);
+    align-items: center;
+    border-top: 2px solid var(--text-on-card);
+    padding-top: clamp(0.6rem, 2vh, 1.5rem);
+}
+.cta-card .four {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 7vw, 6rem);
+    line-height: 0.85;
+}
+.cta-card .steps p {
+    font-size: clamp(0.85rem, 1.7vw, 1.35rem);
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 34ch;
+}
+
+/* ===========================================
+   ANIMATIONS
+   Trigger via .visible class (added by JS on scroll)
+   =========================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+}
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal,
+.slide.visible .reveal-left {
+    opacity: 1;
+    transform: none;
+}
+/* Stagger via inline --d (seconds) */
+.reveal, .reveal-left { transition-delay: calc(var(--d, 0) * 1s); }
+
+/* Rows stagger in one after another */
+.rows li { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo); }
+.slide.visible .rows li { opacity: 1; transform: none; }
+.rows li:nth-child(1) { transition-delay: 0.35s; }
+.rows li:nth-child(2) { transition-delay: 0.45s; }
+.rows li:nth-child(3) { transition-delay: 0.55s; }
+.rows li:nth-child(4) { transition-delay: 0.65s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-left, .rows li { opacity: 1; transform: none; }
+}
+
+/* ===========================================
+   PROGRESS BAR + NAV DOTS
+   =========================================== */
+.progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--card-bg);
+    z-index: 100;
+    transition: width 0.4s var(--ease-out-expo);
+}
+
+.nav-dots {
+    position: fixed;
+    right: clamp(0.5rem, 1.2vw, 1.25rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.4rem, 1vh, 0.7rem);
+    z-index: 100;
+}
+.nav-dots button {
+    width: 8px; height: 8px;
+    border: 1px solid rgba(255,255,255,0.5);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+}
+.nav-dots button.active { background: var(--card-bg); border-color: var(--card-bg); transform: scale(1.3); }
+.nav-dots button:focus-visible { outline: 2px solid var(--card-bg); outline-offset: 3px; }
+
+/* ===========================================
+   NARROW SCREENS: stack columns
+   =========================================== */
+@media (max-width: 760px) {
+    .split { grid-template-columns: 1fr; gap: var(--content-gap); }
+    .rows li { grid-template-columns: 1fr; gap: 0.15rem; }
+    .crumbs { display: none; }
+    .lead { display: none; }
+    .hero-card, .cta-card { width: 100%; }
+    /* Keep the brand mark clear of bottom-anchored cards */
+    .slide-content { padding-bottom: calc(var(--slide-padding) + 2.25em); }
+}
+
+/* ===========================================
+   INLINE EDITING (hotzone top-left, E key, Ctrl+S)
+   =========================================== */
+.edit-hotzone {
+    position: fixed; top: 0; left: 0;
+    width: 80px; height: 80px;
+    z-index: 10000;
+    cursor: pointer;
+}
+.edit-toggle {
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 10001;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-on-card);
+    background: var(--card-bg);
+    border: 0;
+    padding: 8px 12px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.edit-toggle.show,
+.edit-toggle.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.edit-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    z-index: 10001;
+    display: none;
+    gap: 8px;
+    align-items: center;
+    background: #0b0b0b;
+    border: 1px solid var(--rule);
+    padding: 8px 10px;
+    font-size: 12px;
+}
+body.editing .edit-bar { display: flex; }
+.edit-bar button {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1px solid var(--rule);
+    padding: 6px 10px;
+    cursor: pointer;
+}
+.edit-bar button:hover { border-color: var(--card-bg); }
+.edit-bar .status { color: var(--text-secondary); padding: 0 6px; }
+body.editing [data-e] {
+    outline: 1px dashed rgba(255, 87, 34, 0.7);
+    outline-offset: 4px;
+    cursor: text;
+}
+body.editing [data-e]:focus { outline: 2px solid var(--card-bg); }
+
+/* ===========================================
+   PRINT / PDF: one slide per 1280x720 page, no motion, no UI
+   =========================================== */
+@page { size: 1280px 720px; margin: 0; }
+@media print {
+    html, body { height: auto; overflow: visible; background: var(--bg-primary); }
+    html { scroll-snap-type: none; }
+    .slide {
+        width: 1280px;
+        height: 720px;
+        break-after: page;
+        page-break-after: always;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .slide:last-of-type { break-after: auto; page-break-after: auto; }
+    .reveal, .reveal-left, .rows li { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .progress-bar, .nav-dots, .edit-hotzone, .edit-toggle, .edit-bar { display: none !important; }
+    body.editing [data-e] { outline: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar + navigation dots (dots generated by JS) -->
+<div class="progress-bar" aria-hidden="true"></div>
+<nav class="nav-dots" aria-label="Навігація слайдами"></nav>
+
+<!-- Inline editing controls -->
+<div class="edit-hotzone" aria-hidden="true"></div>
+<button class="edit-toggle" id="editToggle" title="Режим редагування (E)">Редагувати</button>
+<div class="edit-bar" role="toolbar" aria-label="Редагування">
+    <span class="status" id="editStatus">Режим редагування</span>
+    <button type="button" id="editSave">Зберегти файл (Ctrl+S)</button>
+    <button type="button" id="editReset">Скинути правки</button>
+    <button type="button" id="editExit">Готово</button>
+</div>
+
+<main>
+
+<!-- =========================================================
+     SLIDE 01 · TITLE
+     ========================================================= -->
+<section class="slide s-title" aria-label="Слайд 1">
+    <!-- SPEAKER NOTES:
+         Пропонуємо створити медійний інвестиційний хаб під брендом «Пространство»:
+         4 YouTube-канали, 1 Instagram і 1 TikTok.
+         Мета: впізнаваність бренду й стійка асоціація з успішними інвестиціями.
+         Пропозицію підготувала студія ArtProstir. -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">01<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span>Задача</span><span>Канали</span><span>Поширення</span><span>Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="hero-card card reveal" style="--d:0.25">
+            <div class="kicker" data-e>Медійний інвестиційний хаб</div>
+            <h1 data-e>Пропозиція для «Пространства»</h1>
+            <div class="channels" data-e>4 YouTube-канали · Instagram · TikTok</div>
+            <p class="tagline" data-e>Мета: впізнаваність бренду й стійка асоціація з успішними інвестиціями.</p>
+        </div>
+    </div>
+    <div class="brand reveal" style="--d:0.5" data-e>ArtProstir</div>
+</section>
+
+<!-- =========================================================
+     SLIDE 02 · TASK
+     ========================================================= -->
+<section class="slide" aria-label="Слайд 2">
+    <!-- SPEAKER NOTES:
+         У «Пространства» є проєкти, експерти й досвід. Щоб регулярно розповідати про них, потрібна окрема команда.
+         Біль: зйомки, монтаж і випуск відео потребують часу, людей і постійної організації.
+         Наше рішення: знімаємо проєкти й експертів, монтуємо великі випуски, робимо нарізки й публікуємо.
+         Як працюємо: ваш маркетинг визначає, що просувати. Ми забезпечуємо регулярний випуск контенту для всіх шести майданчиків. -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">02<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span class="on">Задача</span><span>Канали</span><span>Поширення</span><span>Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="split">
+            <div class="left">
+                <div class="kicker reveal" style="--d:0.15" data-e>Яку задачу закриваємо</div>
+                <h2 class="reveal" style="--d:0.22" data-e>Беремо на себе регулярне виробництво відео</h2>
+                <p class="lead reveal" style="--d:0.3" data-e>У «Пространства» є проєкти, експерти й досвід. Щоб регулярно про них розповідати, потрібна окрема команда.</p>
+            </div>
+            <ul class="rows">
+                <li><span class="label" data-e>Біль</span><span class="text" data-e>Зйомки, монтаж і випуск забирають час, людей і постійну організацію</span></li>
+                <li><span class="label" data-e>Рішення</span><span class="text" data-e>Знімаємо проєкти й експертів, монтуємо великі випуски, робимо нарізки, публікуємо</span></li>
+                <li><span class="label" data-e>Як працюємо</span><span class="text" data-e>Ваш маркетинг визначає, що просувати. Ми забезпечуємо регулярний випуск на всіх шести майданчиках</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="brand" data-e>ArtProstir</div>
+</section>
+
+<!-- =========================================================
+     SLIDE 03 · YOUTUBE 01 · ПРОСТІР ІНВЕСТИЦІЙ
+     ========================================================= -->
+<section class="slide" aria-label="Слайд 3">
+    <!-- SPEAKER NOTES:
+         Робоча назва: «Простір інвестицій».
+         Розбираємо інвестиційні кейси й докладно показуємо, в чому вигода.
+         Що випускаємо: історії успішних інвесторів, огляди об'єктів, розбори результатів і анонси нових проєктів.
+         Для кого: для потенційних інвесторів і людей, які обирають об'єкт для вкладень.
+         Завдання каналу: показати конкретні можливості й зацікавити проєктами «Пространства».
+         Орієнтир за форматом: Укрінвестклуб. Результати кейсів підтверджуємо даними. -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">03<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span>Задача</span><span class="on">Канали</span><span>Поширення</span><span>Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="split">
+            <div class="channel-card reveal-left" style="--d:0.15">
+                <div class="kicker" data-e>YouTube / 01 / Робоча назва</div>
+                <h2 data-e>Простір інвестицій</h2>
+                <p data-e>Розбираємо інвестиційні кейси й показуємо, в чому вигода</p>
+            </div>
+            <ul class="rows">
+                <li><span class="label" data-e>Що випускаємо</span><span class="text" data-e>Історії успішних інвесторів, огляди об'єктів, розбори результатів, анонси нових проєктів</span></li>
+                <li><span class="label" data-e>Для кого</span><span class="text" data-e>Потенційні інвестори, які обирають об'єкт для вкладень</span></li>
+                <li><span class="label" data-e>Завдання</span><span class="text" data-e>Показати конкретні можливості й зацікавити проєктами «Пространства»</span></li>
+                <li class="note"><span class="label" data-e>Орієнтир</span><span class="text" data-e>Формат Укрінвестклубу. Результати кейсів підтверджуємо даними</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="brand" data-e>ArtProstir</div>
+</section>
+
+<!-- =========================================================
+     SLIDE 04 · YOUTUBE 02 · БІЗНЕС. ІНВЕСТИЦІЇ. ЛЮДИ
+     ========================================================= -->
+<section class="slide" aria-label="Слайд 4">
+    <!-- SPEAKER NOTES:
+         Робоча назва: «Бізнес. Інвестиції. Люди».
+         Запрошуємо CEO, лідерів ринку й топменеджерів на змістовні розмови.
+         Що випускаємо: великі подкасти про бізнес, інвестиції, управління й особистий досвід гостей.
+         Для кого: для підприємців, інвесторів, керівників і тих, кому важливий досвід практиків.
+         Завдання каналу: посилювати бренд компанії через людей, експертизу й професійне оточення. -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">04<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span>Задача</span><span class="on">Канали</span><span>Поширення</span><span>Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="split">
+            <div class="channel-card reveal-left" style="--d:0.15">
+                <div class="kicker" data-e>YouTube / 02 / Робоча назва</div>
+                <h2 data-e>Бізнес. Інвестиції. Люди</h2>
+                <p data-e>CEO, лідери ринку й топменеджери у змістовних розмовах</p>
+            </div>
+            <ul class="rows">
+                <li><span class="label" data-e>Що випускаємо</span><span class="text" data-e>Великі подкасти про бізнес, інвестиції, управління й особистий досвід гостей</span></li>
+                <li><span class="label" data-e>Для кого</span><span class="text" data-e>Підприємці, інвестори, керівники й усі, кому важливий досвід практиків</span></li>
+                <li><span class="label" data-e>Завдання</span><span class="text" data-e>Посилювати бренд компанії через людей, експертизу й професійне оточення</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="brand" data-e>ArtProstir</div>
+</section>
+
+<!-- =========================================================
+     SLIDE 05 · YOUTUBE 03 · ПРОСТІР ІННОВАЦІЙ
+     ========================================================= -->
+<section class="slide" aria-label="Слайд 5">
+    <!-- SPEAKER NOTES:
+         Робоча назва: «Простір інновацій».
+         Розповідаємо, що відбувається з грошима й бізнесом в Україні та світі.
+         Що випускаємо: інновації, світова економіка, бренди, бізнес-факапи й нові інвестиційні проєкти.
+         Для кого: для людей, яким цікаві гроші, технології й бізнес, зокрема майбутніх інвесторів.
+         Завдання каналу: залучати нову аудиторію й давати привід регулярно стежити за «Пространством». -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">05<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span>Задача</span><span class="on">Канали</span><span>Поширення</span><span>Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="split">
+            <div class="channel-card reveal-left" style="--d:0.15">
+                <div class="kicker" data-e>YouTube / 03 / Робоча назва</div>
+                <h2 data-e>Простір інновацій</h2>
+                <p data-e>Що відбувається з грошима й бізнесом в Україні та світі</p>
+            </div>
+            <ul class="rows">
+                <li><span class="label" data-e>Що випускаємо</span><span class="text" data-e>Інновації, світова економіка, бренди, бізнес-факапи, нові інвестиційні проєкти</span></li>
+                <li><span class="label" data-e>Для кого</span><span class="text" data-e>Ті, кому цікаві гроші, технології й бізнес, зокрема майбутні інвестори</span></li>
+                <li><span class="label" data-e>Завдання</span><span class="text" data-e>Залучати нову аудиторію й давати привід регулярно стежити за «Пространством»</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="brand" data-e>ArtProstir</div>
+</section>
+
+<!-- =========================================================
+     SLIDE 06 · YOUTUBE 04 · ШКОЛА ФІНАНСОВОЇ ГРАМОТНОСТІ
+     ========================================================= -->
+<section class="slide" aria-label="Слайд 6">
+    <!-- SPEAKER NOTES:
+         Робоча назва: «Школа фінансової грамотності».
+         Робимо міні-курси для дітей, підлітків, дорослих і літніх людей.
+         Чого вчимо: основам фінансової грамотності — бюджет, накопичення, розумне інвестування й ризики.
+         Для кого: для різних вікових груп. Зрозуміла мова й окрема програма для кожної.
+         Завдання каналу: підтримувати освіту й суспільно важливі проєкти, формувати довіру до бренду. -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">06<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span>Задача</span><span class="on">Канали</span><span>Поширення</span><span>Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="split">
+            <div class="channel-card reveal-left" style="--d:0.15">
+                <div class="kicker" data-e>YouTube / 04 / Робоча назва</div>
+                <h2 data-e>Школа фінансової грамотності</h2>
+                <p data-e>Міні-курси для дітей, підлітків, дорослих і літніх людей</p>
+            </div>
+            <ul class="rows">
+                <li><span class="label" data-e>Чого вчимо</span><span class="text" data-e>Основи фінансової грамотності: бюджет, накопичення, розумне інвестування, ризики</span></li>
+                <li><span class="label" data-e>Для кого</span><span class="text" data-e>Різні вікові групи. Зрозуміла мова й окрема програма для кожної</span></li>
+                <li><span class="label" data-e>Завдання</span><span class="text" data-e>Підтримувати освіту й суспільно важливі проєкти, формувати довіру до бренду</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="brand" data-e>ArtProstir</div>
+</section>
+
+<!-- =========================================================
+     SLIDE 07 · DISTRIBUTION
+     ========================================================= -->
+<section class="slide" aria-label="Слайд 7">
+    <!-- SPEAKER NOTES:
+         Великі відео працюють на всіх майданчиках.
+         Instagram, TikTok і YouTube Shorts — яскраві моменти й нарізки з великих випусків.
+         Для кого: для аудиторії коротких відео. Знайомимо з темою й ведемо до повних випусків.
+         У майбутньому: шоу з розборами бізнесів — підприємці зі своїми кейсами й експерти з інвестиціями та порадами. -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">07<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span>Задача</span><span>Канали</span><span class="on">Поширення</span><span>Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="split">
+            <div class="left">
+                <div class="kicker reveal" style="--d:0.15" data-e>Поширення</div>
+                <h2 class="reveal" style="--d:0.22" data-e>Великі відео працюють на всіх майданчиках</h2>
+            </div>
+            <ul class="rows">
+                <li><span class="label" data-e>Що робимо</span><span class="text" data-e>Instagram, TikTok, YouTube Shorts: яскраві моменти й нарізки з великих випусків</span></li>
+                <li><span class="label" data-e>Для кого</span><span class="text" data-e>Аудиторія коротких відео. Знайомимо з темою й ведемо до повних випусків</span></li>
+                <li><span class="label" data-e>У майбутньому</span><span class="text" data-e>Шоу з розборами бізнесів: підприємці зі своїми кейсами, експерти з інвестиціями й порадами</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="brand" data-e>ArtProstir</div>
+</section>
+
+<!-- =========================================================
+     SLIDE 08 · NEXT STEP
+     ========================================================= -->
+<section class="slide s-final" aria-label="Слайд 8">
+    <!-- SPEAKER NOTES:
+         Якщо пропозиція підходить, ділимо роботу на чотири окремі проєкти
+         й тестуємо гіпотези кожного каналу. -->
+    <div class="topbar">
+        <div class="num reveal" style="--d:0.05">08<small>/ 08</small></div>
+        <nav class="crumbs reveal" style="--d:0.15" aria-hidden="true"><span>Задача</span><span>Канали</span><span>Поширення</span><span class="on">Крок</span></nav>
+    </div>
+    <div class="slide-content">
+        <div class="cta-card card reveal" style="--d:0.2">
+            <div class="kicker" data-e>Наступний крок</div>
+            <h2 data-e>Якщо пропозиція підходить</h2>
+            <div class="steps">
+                <div class="four" data-e>4</div>
+                <p data-e>Ділимо роботу на чотири окремі проєкти й тестуємо гіпотези кожного каналу</p>
+            </div>
+        </div>
+    </div>
+    <div class="brand reveal" style="--d:0.45" data-e>ArtProstir</div>
+</section>
+
+</main>
+
+<script>
+/* ===========================================
+   SLIDE PRESENTATION CONTROLLER
+   Keyboard, wheel, touch, progress bar, nav dots,
+   IntersectionObserver for .visible animations
+   =========================================== */
+class SlidePresentation {
+    constructor() {
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.currentSlide = 0;
+        this.locked = false;
+        this.progress = document.querySelector('.progress-bar');
+        this.dotsNav = document.querySelector('.nav-dots');
+        this.setupNavDots();
+        this.setupIntersectionObserver();
+        this.setupKeyboardNav();
+        this.setupWheelNav();
+        this.setupTouchNav();
+        this.updateUI();
+    }
+
+    /* Add .visible when a slide is mostly on screen; track current slide */
+    setupIntersectionObserver() {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    this.currentSlide = this.slides.indexOf(entry.target);
+                    this.updateUI();
+                }
+            });
+        }, { threshold: 0.55 });
+        this.slides.forEach((s) => io.observe(s));
+    }
+
+    goTo(index) {
+        const i = Math.max(0, Math.min(this.slides.length - 1, index));
+        this.currentSlide = i;
+        this.slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.updateUI();
+    }
+    next() { this.goTo(this.currentSlide + 1); }
+    prev() { this.goTo(this.currentSlide - 1); }
+
+    /* Arrows, Space, Page Up/Down, Home/End. Disabled while typing in edit mode */
+    setupKeyboardNav() {
+        document.addEventListener('keydown', (e) => {
+            if (e.target.isContentEditable) return;
+            const k = e.key;
+            if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(k)) { e.preventDefault(); this.next(); }
+            else if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(k)) { e.preventDefault(); this.prev(); }
+            else if (k === 'Home') { e.preventDefault(); this.goTo(0); }
+            else if (k === 'End') { e.preventDefault(); this.goTo(this.slides.length - 1); }
+        });
+    }
+
+    /* One wheel gesture = one slide */
+    setupWheelNav() {
+        window.addEventListener('wheel', (e) => {
+            if (document.body.classList.contains('editing')) return;
+            e.preventDefault();
+            if (this.locked || Math.abs(e.deltaY) < 12) return;
+            this.locked = true;
+            e.deltaY > 0 ? this.next() : this.prev();
+            setTimeout(() => { this.locked = false; }, 750);
+        }, { passive: false });
+    }
+
+    /* Swipe up/down (and left/right) on touch screens */
+    setupTouchNav() {
+        let sx = 0, sy = 0;
+        window.addEventListener('touchstart', (e) => {
+            sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+        }, { passive: true });
+        window.addEventListener('touchmove', (e) => {
+            if (!document.body.classList.contains('editing')) e.preventDefault();
+        }, { passive: false });
+        window.addEventListener('touchend', (e) => {
+            if (document.body.classList.contains('editing')) return;
+            const dx = e.changedTouches[0].clientX - sx;
+            const dy = e.changedTouches[0].clientY - sy;
+            const d = Math.abs(dy) > Math.abs(dx) ? dy : dx;
+            if (Math.abs(d) < 40) return;
+            d < 0 ? this.next() : this.prev();
+        });
+    }
+
+    setupNavDots() {
+        this.dotsNav.innerHTML = '';
+        this.slides.forEach((_, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Слайд ' + (i + 1));
+            b.addEventListener('click', () => this.goTo(i));
+            this.dotsNav.appendChild(b);
+        });
+        this.dots = Array.from(this.dotsNav.children);
+    }
+
+    updateUI() {
+        const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+        this.progress.style.width = pct + '%';
+        this.dots.forEach((d, i) => {
+            d.classList.toggle('active', i === this.currentSlide);
+            d.setAttribute('aria-current', i === this.currentSlide ? 'true' : 'false');
+        });
+    }
+}
+
+const deck = new SlidePresentation();
+
+/* ===========================================
+   INLINE EDITOR
+   Elements with [data-e] become editable.
+   Edits auto-save to localStorage; Ctrl+S downloads the edited HTML file.
+   =========================================== */
+class InlineEditor {
+    constructor() {
+        this.key = 'artprostir-prostranstvo-deck-v1';
+        this.nodes = Array.from(document.querySelectorAll('[data-e]'));
+        this.isActive = false;
+        this.status = document.getElementById('editStatus');
+        this.load();
+        this.nodes.forEach((n) => n.addEventListener('input', () => this.save()));
+    }
+
+    toggleEditMode() { this.isActive ? this.disable() : this.enable(); }
+
+    enable() {
+        this.isActive = true;
+        document.body.classList.add('editing');
+        document.getElementById('editToggle').classList.add('active');
+        this.nodes.forEach((n) => { n.setAttribute('contenteditable', 'true'); n.spellcheck = false; });
+    }
+
+    disable() {
+        this.isActive = false;
+        document.body.classList.remove('editing');
+        const t = document.getElementById('editToggle');
+        t.classList.remove('active', 'show');
+        this.nodes.forEach((n) => n.removeAttribute('contenteditable'));
+        if (document.activeElement) document.activeElement.blur();
+    }
+
+    save() {
+        const data = this.nodes.map((n) => n.innerHTML);
+        try {
+            localStorage.setItem(this.key, JSON.stringify(data));
+            this.flash('Збережено в браузері');
+        } catch (err) {
+            this.flash('Браузер не дозволяє зберегти, скористайтеся «Зберегти файл»');
+        }
+    }
+
+    load() {
+        try {
+            const raw = localStorage.getItem(this.key);
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            if (Array.isArray(data) && data.length === this.nodes.length) {
+                data.forEach((html, i) => { this.nodes[i].innerHTML = html; });
+            }
+        } catch (err) { /* storage unavailable: keep original text */ }
+    }
+
+    reset() {
+        try { localStorage.removeItem(this.key); } catch (err) {}
+        location.reload();
+    }
+
+    /* Download a clean copy of the deck with current text baked in */
+    exportFile() {
+        const clone = document.documentElement.cloneNode(true);
+        clone.querySelectorAll('[contenteditable]').forEach((n) => n.removeAttribute('contenteditable'));
+        clone.querySelectorAll('.slide.visible').forEach((n) => n.classList.remove('visible'));
+        clone.querySelector('body').classList.remove('editing');
+        const t = clone.querySelector('#editToggle'); if (t) t.classList.remove('active', 'show');
+        const dots = clone.querySelector('.nav-dots'); if (dots) dots.innerHTML = '';
+        const bar = clone.querySelector('.progress-bar'); if (bar) bar.removeAttribute('style');
+        const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'prostranstvo-offer.html';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        this.flash('Файл збережено');
+    }
+
+    flash(msg) {
+        if (!this.status) return;
+        this.status.textContent = msg;
+        clearTimeout(this._t);
+        this._t = setTimeout(() => { this.status.textContent = 'Режим редагування'; }, 1800);
+    }
+}
+
+const editor = new InlineEditor();
+
+/* Edit toggle: click, hotzone hover with 400ms grace period, hotzone click, E key */
+const hotzone = document.querySelector('.edit-hotzone');
+const editToggle = document.getElementById('editToggle');
+let hideTimeout = null;
+
+editToggle.addEventListener('click', () => editor.toggleEditMode());
+
+hotzone.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    editToggle.classList.add('show');
+});
+hotzone.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove('show');
+    }, 400);
+});
+editToggle.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+editToggle.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove('show');
+    }, 400);
+});
+hotzone.addEventListener('click', () => editor.toggleEditMode());
+
+document.addEventListener('keydown', (e) => {
+    if ((e.key === 'e' || e.key === 'E' || e.key === 'у' || e.key === 'У') && !e.target.isContentEditable && !e.ctrlKey && !e.metaKey) {
+        editor.toggleEditMode();
+    }
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'ы' || e.key === 'і')) {
+        e.preventDefault();
+        editor.save();
+        editor.exportFile();
+    }
+    if (e.key === 'Escape' && editor.isActive) editor.disable();
+});
+
+document.getElementById('editSave').addEventListener('click', () => { editor.save(); editor.exportFile(); });
+document.getElementById('editReset').addEventListener('click', () => editor.reset());
+document.getElementById('editExit').addEventListener('click', () => editor.disable());
+</script>
+</body>
+</html>
